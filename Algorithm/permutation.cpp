@@ -19,6 +19,7 @@ void permu(int id)
             ch[i] = res[i];
         }
         ch[i]='\0';
+        //if there is any multiple same character
         if(m.find(ch) == m.end())
         {
             m[ch]=asign++;
