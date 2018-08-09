@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdlib.h>
 
 struct node{
 
     int data;
+    char *str;
     struct node *next;
 };
 
@@ -36,17 +38,19 @@ void insert_at_begin(struct node** head, int value)
     return;
 }
 
-void insert_at_end(struct node** head,int value)
+void insert_at_end(struct node** head,int value )
 {
     if( *head == NULL)
     {
         struct node* cur=(struct node*)malloc(sizeof(struct node));
         cur->data=value;
+//        char *c=(char*)malloc( sizeof( strlen(ch) + 5 ) );
+////        c=ch;
+//        (cur->str=ch);
         cur->next=NULL;
         *head=cur;
         return;
     }
-
     struct node* cur = *head;
 
     while( cur->next != NULL)
@@ -75,6 +79,13 @@ void insert_at_position(struct node** head,int value ,int position)
         cur = cur->next;
     }
 
+//    struct node* cur_after=cur->next;
+//    struct node* newnode=(struct node*)malloc(sizeof(struct node));
+//    newnode->data=value;
+//
+//    newnode->next= cur->next ;
+//    cur->next = newnode;
+
     struct node* cur_after=cur->next;
     struct node* newnode=(struct node*)malloc(sizeof(struct node));
     newnode->data=value;
@@ -93,7 +104,7 @@ void remove_at_last(struct node** head )
         cur=cur->next;
     }
     cur->next=NULL;
-
+    return;
 }
 
 void remove_at_begin(struct node** head)
@@ -107,7 +118,7 @@ void remove_at_begin(struct node** head)
 void remove_at_position(struct node** head,int position)
 {
 
-        struct node* temp=*head;
+    struct node* temp=*head;
     if( temp == NULL)
     {
         printf("list is empty");
@@ -125,13 +136,11 @@ void remove_at_position(struct node** head,int position)
         cur=temp;
         temp =temp->next;
     }
-
-    if(temp->next == NULL)
+    if(temp == NULL)
     {
         printf("out of bound\n");
         return;
     }
-
     cur->next=temp->next;
 
     return ;
@@ -184,6 +193,7 @@ void remove_duplicate(struct node** head)
     }
     return;
 }
+
 int finding_cycle(struct node** head)
 {
     if(head != NULL)
@@ -238,17 +248,14 @@ void reverse_print(struct node* head)
 int main()
 {
     struct node *head= NULL;
-
     insert_at_end(&head,10);
     insert_at_end(&head,15);
     insert_at_end(&head,20);
-    insert_at_end(&head, 25);
-    insert_at_end(&head,30);
-    insert_at_begin(&head,10);
-    insert_at_position(&head,25,5);
+    insert_at_end(&head,25);
     print_linked_list(head);
-    remove_duplicate(&head);
-    print_linked_list(head);
+    remove_at_position(&head,4);
+
+     print_linked_list(head);
 
     return 0;
 }
